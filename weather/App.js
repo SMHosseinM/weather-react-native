@@ -1,25 +1,48 @@
-import { StatusBar } from 'expo-status-bar';
+import React from 'react';
 import { StyleSheet, Text, Platform, KeyboardAvoidingView, ImageBackground, View } from 'react-native';
 import SearchInput from './components/SearchInput';
 
-export default function App() {
-  return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <ImageBackground
-        source={require('./assets/background.png')}
-        style={styles.imageContainer}
-        imageStyle={styles.image}
-      >
-        <View style={styles.detailsContainer}>
-          <Text style={[styles.largeText, styles.textStyle]}>San Francisco</Text>
-          <Text style={[styles.smallText, styles.textStyle]}>Light Cloud</Text>
-          <Text style={[styles.largeText, styles.textStyle]}>24°</Text>
-          <SearchInput placeholder="Search any city" />
-          <StatusBar style="auto" />
-        </View>
-      </ImageBackground>
-    </KeyboardAvoidingView>
-  );
+export default class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      location: ''
+    }
+  };
+
+  componentDidMount() {
+    this.updateLocation('San Francisco');
+  }
+
+  updateLocation = (city) => {
+    this.setState({
+      location: city
+    });
+  }
+
+  render() {
+    const { location } = this.state
+    return (
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <ImageBackground
+          source={require('./assets/background.png')}
+          style={styles.imageContainer}
+          imageStyle={styles.image}
+        >
+          <View style={styles.detailsContainer}>
+            <Text style={[styles.largeText, styles.textStyle]}>{location}</Text>
+            <Text style={[styles.smallText, styles.textStyle]}>Light Cloud</Text>
+            <Text style={[styles.largeText, styles.textStyle]}>24°</Text>
+            <SearchInput
+              placeholder="Search any city"
+              onSubmit={this.updateLocation}
+            />
+          </View>
+        </ImageBackground>
+      </KeyboardAvoidingView>
+    )
+  };
 }
 
 const styles = StyleSheet.create({
