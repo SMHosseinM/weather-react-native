@@ -10,7 +10,7 @@ export default function App() {
         style={styles.imageContainer}
         imageStyle={styles.image}
       >
-        <View>
+        <View style={styles.detailsContainer}>
           <Text style={[styles.largeText, styles.textStyle]}>San Francisco</Text>
           <Text style={[styles.smallText, styles.textStyle]}>Light Cloud</Text>
           <Text style={[styles.largeText, styles.textStyle]}>24°</Text>
@@ -26,8 +26,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    justifyContent: 'center',
   },
   textStyle: {
     textAlign: 'center',
@@ -43,7 +41,18 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flex: 1,
-    resizeMode: "cover",
     justifyContent: "center"
-  }
+  },
+  image: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'cover',
+  },
+  detailsContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    paddingHorizontal: 20,
+  },
 });
